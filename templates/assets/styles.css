@@ -17,10 +17,12 @@ h1 {
 }
 
 #question {
+    min-width: 300px;
     width: 90%;
     max-width: 1200px;
-    max-height: 800px;
+    min-height: 80px;
     height: 80px;
+    max-height: 300px;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
