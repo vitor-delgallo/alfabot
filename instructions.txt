@@ -1,0 +1,4 @@
+Iniciei com pyenv local 3.13.1 na pasta
+fiz o requirements.txt sem as versões definidas das dependencias, só listando elas com os nomes e pulando linhas
+depois usei o comando pip install -r requirements.txt para instalar
+e o comando pip freeze > requirements.txt para recriar os requeriments com as versões instaladas de cada dependencia
