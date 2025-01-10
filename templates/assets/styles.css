@@ -46,6 +46,7 @@ button:disabled {
 
 #send-button {
     background-color: #007bff;
+    display: none;
 }
 
 #send-button:disabled {
@@ -55,11 +56,11 @@ button:disabled {
 #exit-button {
     background-color: #ff4d4d;
     margin-left: 10px;
+    display: none;
 }
 
 #start-new-chat {
     background-color: #28a745;
-    display: none;
 }
 
 #chat-history {

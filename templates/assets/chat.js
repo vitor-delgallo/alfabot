@@ -106,20 +106,48 @@ function exitChat() {
     scrollToBottom();
 }
 
-function startNewChat() {
-    const historyElement = document.getElementById('chat-history');
-    const exitButton = document.getElementById('exit-button');
-    const sendButton = document.getElementById('send-button');
+async function startNewChat() {
     const startNewChatButton = document.getElementById('start-new-chat');
+    const historyElement = document.getElementById('chat-history');
+    const sendButton = document.getElementById('send-button');
+    const exitButton = document.getElementById('exit-button');
 
-    historyElement.innerHTML = document.getElementById('default-message-hello').innerHTML;
+    startNewChatButton.disabled = true;
+    startNewChatButton.innerText = 'Carregando';
 
-    sendButton.style.display = 'inline-block';
-    exitButton.style.display = 'inline-block';
-    startNewChatButton.style.display = 'none';
+    let buttonDots = 0;
+    const buttonInterval = setInterval(() => {
+        buttonDots = (buttonDots + 1) % 4;
+        startNewChatButton.innerText = `Carregando${'.'.repeat(buttonDots)}`;
+    }, 500);
 
-    document.getElementById('question').value = '';
-    toggleButton();
+    try {
+        const response = await fetch('http://127.0.0.1:5000/init', {
+            method: 'GET'
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao iniciar novo chat');
+        }
+
+        clearInterval(buttonInterval);
+
+        historyElement.innerHTML = document.getElementById('default-message-hello').innerHTML;
+        sendButton.style.display = 'inline-block';
+        exitButton.style.display = 'inline-block';
+        startNewChatButton.style.display = 'none';
+
+        document.getElementById('question').value = '';
+        toggleButton();
+        scrollToBottom();
+    } catch (error) {
+        console.error(error);
+        alert(error.message);
+    } finally {
+        clearInterval(buttonInterval);
+        startNewChatButton.disabled = false;
+        startNewChatButton.innerText = 'Iniciar Novo Chat';
+    }
 }
 
 startNewChat();

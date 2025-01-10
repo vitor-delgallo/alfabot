@@ -29,7 +29,7 @@ def ask():
     return jsonify(send_message(question))
 
 # Endpoint para iniciar o bot
-@bp.route('/init', methods=['POST'])
+@bp.route('/init')
 def init():
     """
     Endpoint para reiniciar o bot
