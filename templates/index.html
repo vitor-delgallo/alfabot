@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AsimoBot Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Chat com AsimoBot</h1>
+    <textarea id="question" placeholder="Digite sua pergunta aqui"></textarea><br>
+    <button onclick="sendQuestion()">Enviar</button>
+    <div id="chat-history"></div>
+
+    <!-- Importa o JavaScript externo -->
+    <script src="{{ url_for('static', filename='chat.js') }}"></script>
+</body>
+</html>
