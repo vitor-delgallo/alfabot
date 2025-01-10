@@ -39,3 +39,6 @@ from dotenv import load_dotenv
 
 # Carregar as variáveis de ambiente do arquivo .env
 load_dotenv()
+
+# Definição de variáveis do OS do sistema
+os.environ["USER_AGENT"] = get_env_variable("USER_AGENT")

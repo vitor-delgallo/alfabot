@@ -1,4 +1,6 @@
-Iniciei com pyenv local 3.13.1 na pasta
-fiz o requirements.txt sem as versões definidas das dependencias, só listando elas com os nomes e pulando linhas
-depois usei o comando pip install -r requirements.txt para instalar
-e o comando pip freeze > requirements.txt para recriar os requeriments com as versões instaladas de cada dependencia
+1. Instalei a versão do Python pelo comando "pyenv install 3.13.1"
+2. Configurei o ambiente local do projeto utilizando o comando "pyenv local 3.13.1", definindo a versão do Python para a pasta do projeto.
+3. Atualizei o pip com o comando "python -m pip install --upgrade pip"
+4. Criei um arquivo "requirements.txt", listando apenas os nomes das dependências necessárias, separadas por linhas. Não especifiquei versões neste primeiro momento.
+5. Executei o comando "pip install -r requirements.txt" para instalar todas as dependências listadas.
+6. Por fim, utilizei o comando "pip freeze > requirements.txt" para atualizar o arquivo requirements.txt com as versões exatas das dependências instaladas, garantindo a replicabilidade do ambiente.
