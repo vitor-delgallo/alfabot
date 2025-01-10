@@ -9,9 +9,13 @@
 <body>
     <h1>Chat com ALFABot</h1>
     <textarea id="question" placeholder="Digite sua pergunta aqui" oninput="toggleButton()"></textarea><br>
-    <button id="send-button" onclick="sendQuestion()" disabled>Enviar</button>
-    <button id="exit-button" onclick="exitChat()">Sair</button>
-    <button id="start-new-chat" onclick="startNewChat()">Iniciar Novo Chat</button>
+    <div class="buttons">
+        <div class="separate-flex"></div>
+        <button id="send-button" onclick="sendQuestion()" disabled>Enviar</button>
+        <button id="exit-button" onclick="exitChat()">Sair</button>
+        <button id="start-new-chat" onclick="startNewChat()">Iniciar Novo Chat</button>
+        <div class="separate-flex"></div>
+    </div>
     <div class="console-message" id="default-message-exit">
         ALFABot: Espero ter ajudado com as informações que você precisava!
         Se surgir alguma outra dúvida ou precisar de mais detalhes, estarei aqui, pronto para ajudar.

@@ -101,7 +101,7 @@ function exitChat() {
 
     sendButton.style.display = 'none';
     exitButton.style.display = 'none';
-    startNewChatButton.style.display = 'inline-block';
+    startNewChatButton.style.display = 'flex';
 
     scrollToBottom();
 }
@@ -133,8 +133,8 @@ async function startNewChat() {
         clearInterval(buttonInterval);
 
         historyElement.innerHTML = document.getElementById('default-message-hello').innerHTML;
-        sendButton.style.display = 'inline-block';
-        exitButton.style.display = 'inline-block';
+        sendButton.style.display = 'flex';
+        exitButton.style.display = 'flex';
         startNewChatButton.style.display = 'none';
 
         document.getElementById('question').value = '';

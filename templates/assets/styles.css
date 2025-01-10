@@ -18,8 +18,8 @@ h1 {
 
 #question {
     width: 90%;
-    max-width: 600px;
-    max-height: 1000px;
+    max-width: 1200px;
+    max-height: 800px;
     height: 80px;
     padding: 10px;
     font-size: 16px;
@@ -42,32 +42,48 @@ button {
 button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
+    opacity: 0.7;
 }
 
 #send-button {
     background-color: #007bff;
     display: none;
-}
-
-#send-button:disabled {
-    opacity: 0.7;
+    width: 100%;
+    flex: 1;
 }
 
 #exit-button {
     background-color: #ff4d4d;
-    margin-left: 10px;
     display: none;
+    width: 100%;
+    flex: 1;
+    margin-left: 30px
 }
 
 #start-new-chat {
     background-color: #28a745;
+    width: 100%;
+    display: flex;
+    flex: 1;
+}
+
+.buttons {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.separate-flex {
+    display: flex;
+    flex: 2;
 }
 
 #chat-history {
     margin-top: 20px;
+    margin-bottom: 30px;
     width: 90%;
-    max-width: 600px;
-    height: 300px;
+    max-width: 1200px;
+    height: 500px;
     overflow-y: auto;
     background: #fff;
     border: 1px solid #ccc;
