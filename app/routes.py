@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, jsonify
-from utils.bot_logic import send_message
+from utils.bot_logic import send_message, initialize_chatbot
 
 bp = Blueprint('routes', __name__)
 
@@ -27,3 +27,14 @@ def ask():
 
     # Chama a função do script
     return jsonify(send_message(question))
+
+# Endpoint para iniciar o bot
+@bp.route('/init', methods=['POST'])
+def init():
+    """
+    Endpoint para reiniciar o bot
+    """
+
+    # Chama a função do script
+    initialize_chatbot()
+    return jsonify({})

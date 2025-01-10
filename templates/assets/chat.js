@@ -1,81 +1,125 @@
 let isLoading = false;
-        let loadingDots = 0;
-        let loadingInterval;
+let loadingDots = 0;
+let loadingInterval;
 
-        function toggleButton() {
-            const question = document.getElementById('question').value;
-            const sendButton = document.getElementById('send-button');
-            sendButton.disabled = !question.trim();
+function toggleButton() {
+    const question = document.getElementById('question').value;
+    const sendButton = document.getElementById('send-button');
+    sendButton.disabled = !question.trim();
+}
+
+function scrollToBottom() {
+    const historyElement = document.getElementById('chat-history');
+    historyElement.scrollTop = historyElement.scrollHeight;
+}
+
+async function sendQuestion() {
+    const question = document.getElementById('question').value;
+    const historyElement = document.getElementById('chat-history');
+    const sendButton = document.getElementById('send-button');
+
+    if (!question.trim()) return;
+
+    // Adiciona ao histórico o texto do usuário
+    const userDiv = document.createElement('div');
+    userDiv.className = 'user';
+    userDiv.innerText = `Você: ${question}`;
+    historyElement.appendChild(userDiv);
+
+    // Adiciona "Escrevendo..." para o ALFABot
+    const botDiv = document.createElement('div');
+    botDiv.className = 'bot';
+    botDiv.innerText = 'ALFABot: Escrevendo';
+    historyElement.appendChild(botDiv);
+
+    scrollToBottom();
+
+    // Alterna os "..." de Escrevendo
+    isLoading = true;
+    loadingInterval = setInterval(() => {
+        loadingDots = (loadingDots + 1) % 4;
+        botDiv.innerText = `ALFABot: Escrevendo${'.'.repeat(loadingDots)}`;
+    }, 500);
+
+    // Desabilita o botão e altera o texto
+    sendButton.disabled = true;
+    sendButton.innerText = 'Carregando';
+    let buttonDots = 0;
+    const buttonInterval = setInterval(() => {
+        buttonDots = (buttonDots + 1) % 4;
+        sendButton.innerText = `Carregando${'.'.repeat(buttonDots)}`;
+    }, 500);
+
+    try {
+        const response = await fetch('http://127.0.0.1:5000/ask', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ question })
+        });
+
+        const data = await response.json();
+        clearInterval(loadingInterval);
+        clearInterval(buttonInterval);
+        isLoading = false;
+
+        if (data.error) {
+            alert(data.error);
+            return;
         }
 
-        async function sendQuestion() {
-            const question = document.getElementById('question').value;
-            const historyElement = document.getElementById('chat-history');
-            const sendButton = document.getElementById('send-button');
+        // Atualiza o texto do ALFABot
+        botDiv.innerText = `ALFABot: ${data.history[data.history.length - 1][1]}`;
 
-            if (!question.trim()) return;
+        // Limpa o campo de entrada
+        document.getElementById('question').value = '';
+        toggleButton();
+        scrollToBottom();
+    } catch (error) {
+        console.error(error);
+        alert("Erro ao se conectar ao servidor.");
+    } finally {
+        clearInterval(loadingInterval);
+        clearInterval(buttonInterval);
+        isLoading = false;
+        sendButton.disabled = false;
+        sendButton.innerText = 'Enviar';
+    }
+}
 
-            // Adiciona ao histórico o texto do usuário
-            const userDiv = document.createElement('div');
-            userDiv.className = 'user';
-            userDiv.innerText = `Você: ${question}`;
-            historyElement.appendChild(userDiv);
+function exitChat() {
+    const historyElement = document.getElementById('chat-history');
+    const exitButton = document.getElementById('exit-button');
+    const sendButton = document.getElementById('send-button');
+    const startNewChatButton = document.getElementById('start-new-chat');
 
-            // Adiciona "Escrevendo..." para o AsimoBot
-            const botDiv = document.createElement('div');
-            botDiv.className = 'bot';
-            botDiv.innerText = 'AsimoBot: Escrevendo';
-            historyElement.appendChild(botDiv);
+    const botDiv = document.createElement('div');
+    botDiv.className = 'bot';
+    botDiv.innerText = document.getElementById('default-message-exit').innerText;
+    historyElement.appendChild(botDiv);
 
-            // Alterna os "..." de Escrevendo
-            isLoading = true;
-            loadingInterval = setInterval(() => {
-                loadingDots = (loadingDots + 1) % 4;
-                botDiv.innerText = `AsimoBot: Escrevendo${'.'.repeat(loadingDots)}`;
-            }, 500);
+    sendButton.style.display = 'none';
+    exitButton.style.display = 'none';
+    startNewChatButton.style.display = 'inline-block';
 
-            // Desabilita o botão e altera o texto
-            sendButton.disabled = true;
-            sendButton.innerText = 'Carregando';
-            let buttonDots = 0;
-            const buttonInterval = setInterval(() => {
-                buttonDots = (buttonDots + 1) % 4;
-                sendButton.innerText = `Carregando${'.'.repeat(buttonDots)}`;
-            }, 500);
+    scrollToBottom();
+}
 
-            try {
-                const response = await fetch('http://127.0.0.1:5000/ask', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ question })
-                });
+function startNewChat() {
+    const historyElement = document.getElementById('chat-history');
+    const exitButton = document.getElementById('exit-button');
+    const sendButton = document.getElementById('send-button');
+    const startNewChatButton = document.getElementById('start-new-chat');
 
-                const data = await response.json();
-                clearInterval(loadingInterval);
-                clearInterval(buttonInterval);
-                isLoading = false;
+    historyElement.innerHTML = document.getElementById('default-message-hello').innerHTML;
 
-                if (data.error) {
-                    alert(data.error);
-                    return;
-                }
+    sendButton.style.display = 'inline-block';
+    exitButton.style.display = 'inline-block';
+    startNewChatButton.style.display = 'none';
 
-                // Atualiza o texto do AsimoBot
-                botDiv.innerText = `AsimoBot: ${data.history[data.history.length - 1][1]}`;
+    document.getElementById('question').value = '';
+    toggleButton();
+}
 
-                // Limpa o campo de entrada
-                document.getElementById('question').value = '';
-                toggleButton();
-            } catch (error) {
-                console.error(error);
-                alert("Erro ao se conectar ao servidor.");
-            } finally {
-                clearInterval(loadingInterval);
-                clearInterval(buttonInterval);
-                isLoading = false;
-                sendButton.disabled = false;
-                sendButton.innerText = 'Enviar';
-            }
-        }
+startNewChat();

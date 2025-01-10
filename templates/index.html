@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,9 +7,25 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Chat com AsimoBot</h1>
+    <h1>Chat com ALFABot</h1>
     <textarea id="question" placeholder="Digite sua pergunta aqui" oninput="toggleButton()"></textarea><br>
     <button id="send-button" onclick="sendQuestion()" disabled>Enviar</button>
+    <button id="exit-button" onclick="exitChat()">Sair</button>
+    <button id="start-new-chat" onclick="startNewChat()">Iniciar Novo Chat</button>
+    <div class="console-message" id="default-message-exit">
+        ALFABot: Espero ter ajudado com as informações que você precisava!
+        Se surgir alguma outra dúvida ou precisar de mais detalhes, estarei aqui, pronto para ajudar.
+        Conte sempre com a ALFA ERP para soluções SAP e com o ALFABot para esclarecer qualquer questão.
+        Até a próxima!
+    </div>
+    <div class="console-message" id="default-message-hello">
+        <div class="bot">
+            ALFABot: Olá! Seja muito bem-vindo(a). Sou o ALFABot, consultor da ALFA ERP - Consultoria SAP Gold Partner,
+            e estou aqui para ajudar com todas as suas dúvidas sobre a ALFA, as soluções SAP ou o desenvolvimento
+            com Service Layer. Fique à vontade para perguntar o que precisar – estarei ao seu lado para garantir que
+            você tenha todas as informações que procura!
+        </div>
+    </div>
     <div id="chat-history"></div>
 
     <!-- Importa o JavaScript externo -->
