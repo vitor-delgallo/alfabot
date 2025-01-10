@@ -96,7 +96,7 @@ function exitChat() {
 
     const botDiv = document.createElement('div');
     botDiv.className = 'bot';
-    botDiv.innerText = document.getElementById('default-message-exit').innerText;
+    botDiv.innerText = document.getElementById('default-message-exit').innerText.trim();
     historyElement.appendChild(botDiv);
 
     sendButton.style.display = 'none';
