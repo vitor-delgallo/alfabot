@@ -88,6 +88,7 @@ python main.py
 ├── main.py                    # Executável principal do projeto
 ├── README.md                  # Documentação do projeto
 └── requirements.txt           # Dependências do pip
+└── requirements_dev.txt       # Dependências do pip resumido para DEV's
 ```
 
 ---
