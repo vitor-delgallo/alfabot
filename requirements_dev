@@ -1,0 +1,8 @@
+python-dotenv
+flask
+langchain
+langchain-groq
+langchain-community
+youtube_transcript_api
+pypdf
+beautifulsoup4
