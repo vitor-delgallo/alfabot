@@ -37,7 +37,7 @@ Antes de começar, certifique-se de que você possui:
 Execute o seguinte comando no terminal para clonar o repositório do projeto:
 ```bash
 cd <diretorio_de_projetos>
-git clone https://github.com/vitorgd16/alfabot.git
+git clone https://github.com/vitor-delgallo/alfabot.git
 ```
 
 ---
